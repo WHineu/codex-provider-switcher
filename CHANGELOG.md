@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0-alpha - Unreleased
+## 0.1.0-alpha - Public release candidate
 
 - Dynamically discover configured Codex providers.
 - Atomically switch the top-level provider with validation and rollback.
