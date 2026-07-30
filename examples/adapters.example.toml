@@ -1,0 +1,13 @@
+# Only providers that need a local compatibility adapter belong here.
+# The provider ID must already exist in ~/.codex/config.toml.
+
+[providers.example_provider]
+type = "http11_gateway"
+listen_port = 18080
+upstream_host = "api.example.invalid"
+upstream_port = 443
+allowed_paths = ["/v1/models", "/v1/responses"]
+models_mode = "proxy"
+
+# If an upstream model catalog is incompatible with what Codex expects, use:
+# models_mode = "empty_codex_catalog"

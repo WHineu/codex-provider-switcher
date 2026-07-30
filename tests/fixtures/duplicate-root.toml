@@ -1,0 +1,8 @@
+model_provider = "provider_a"
+model_provider = "provider_b"
+
+[model_providers.provider_a]
+name = "Provider A"
+
+[model_providers.provider_b]
+name = "Provider B"

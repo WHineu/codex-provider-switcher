@@ -1,0 +1,17 @@
+model = "example-model"
+model_provider = "provider_a" # current
+
+[model_providers.provider_a]
+name = "Provider A"
+base_url = "https://a.example.invalid/v1"
+env_key = "PROVIDER_A_API_KEY"
+wire_api = "responses"
+
+[model_providers.provider_b]
+name = "Provider B"
+base_url = "http://127.0.0.1:19876/v1"
+env_key = "PROVIDER_B_API_KEY"
+wire_api = "responses"
+
+[profiles.keep_this]
+model_provider = "provider_a"
