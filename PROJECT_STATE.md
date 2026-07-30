@@ -4,7 +4,7 @@
 - **Version:** 0.1.0-alpha
 - **Status:** Public release candidate
 - **Git:** Local `main`; `origin` configured
-- **Remote:** `WHineu/codex-provider-switcher` created as a public empty repository; first push pending
+- **Remote:** `WHineu/codex-provider-switcher` is public and `main` has been pushed
 - **Last verified:** 2026-07-30
 
 ## Verified
