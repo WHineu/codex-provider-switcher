@@ -5,7 +5,7 @@ It discovers `[model_providers.*]` dynamically, changes only the top-level
 `model_provider`, validates the result, and restores the original file if
 post-write validation fails.
 
-This repository is an unpublished `0.1.0-alpha` candidate. It is not affiliated
+This repository is a public `0.1.0-alpha` release candidate. It is not affiliated
 with or endorsed by OpenAI or any API provider.
 
 Current verification and release readiness are tracked in `PROJECT_STATE.md`.
