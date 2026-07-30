@@ -21,8 +21,8 @@
 
 ## Before Public Release
 
-1. Confirm repository name and maintainer security contact.
-2. Review license attribution and the complete initial Git diff.
+1. Review license attribution and the complete public-release diff.
+2. Re-authenticate GitHub CLI without exposing or storing credentials in the repository.
 3. Create the public repository only after explicit authorization.
-4. Publish source first; do not distribute an unnotarized binary as a public release.
+4. Enable Private Vulnerability Reporting before announcing the repository.
 5. Re-run all 15 tests in an environment that permits loopback binding.

@@ -86,9 +86,10 @@ Tests use temporary configurations, random loopback ports, and reserved
 
 ## Security
 
-Read `SECURITY.md` before reporting a vulnerability. Do not include API keys,
-Codex auth files, complete private configuration, or provider response bodies
-in an issue.
+Read `SECURITY.md` before reporting a vulnerability. Use GitHub Issues for
+ordinary bugs and GitHub Private Vulnerability Reporting for security issues.
+Do not include API keys, Codex auth files, complete private configuration, or
+provider response bodies in an issue.
 
 ## Contributing
 

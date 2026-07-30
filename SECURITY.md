@@ -7,9 +7,10 @@ loopback exposure, credential handling, request forwarding, or the macOS app.
 
 ## Reporting
 
-Until a public repository has a private security-reporting channel, do not
-publish an undisclosed vulnerability. Contact the maintainer through the
-private channel named in the eventual repository security settings.
+Use GitHub Private Vulnerability Reporting in this repository for security
+issues. Use GitHub Issues only for non-security bugs. If private reporting is
+not yet enabled, do not publish an undisclosed vulnerability in a public issue;
+wait until the private channel is available.
 
 Never include API keys, tokens, `auth.json`, complete private Codex
 configuration, request bodies, response bodies, or personal filesystem paths.
