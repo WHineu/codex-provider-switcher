@@ -5,7 +5,7 @@
 - **Status:** Public release candidate
 - **Git:** Local `main`; `origin` configured
 - **Remote:** `WHineu/codex-provider-switcher` is public and `main` has been pushed
-- **Last verified:** 2026-07-30
+- **Last verified:** 2026-07-31
 
 ## Verified
 
@@ -14,11 +14,18 @@
 - Symbolic-link configuration targets are rejected before path resolution.
 - Active-task confirmation runs before a target adapter is started.
 - Loopback adapter ownership checks use provider, upstream, instance ID, and PID.
-- All 15 offline and lifecycle tests passed in the promoted workspace on 2026-07-30.
+- All 15 offline and lifecycle tests passed in the promoted workspace on 2026-07-31.
 - The native macOS app builds, its plist is valid, embedded resources match source, and strict ad-hoc signature verification passes.
 - Scans found no personal paths, credentials, task IDs, or vendor hard-coding in release files.
 
-## Before Public Announcement
+## Current Release Position
 
-1. Review license attribution and the complete public-release diff.
-2. Enable Private Vulnerability Reporting before announcing the repository.
+- The source repository is already public and `main` has been pushed.
+- License and copyright attribution review is complete.
+- No version tag or GitHub Release has been created yet.
+
+## Remaining Gates
+
+1. In a fresh macOS session, manually verify app launch, provider discovery, switching, and rollback.
+2. Confirm GitHub Private Vulnerability Reporting is enabled before broader announcement.
+3. Decide whether to create the first versioned GitHub Release and how it will be maintained.
