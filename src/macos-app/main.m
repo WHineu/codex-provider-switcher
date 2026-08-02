@@ -49,7 +49,7 @@
     [self.window center];
 
     NSTextField *title = [self label:@"Codex Provider Switcher" size:23 weight:NSFontWeightSemibold];
-    NSTextField *subtitle = [NSTextField labelWithString:@"Switch between providers already configured in Codex."];
+    NSTextField *subtitle = [NSTextField labelWithString:@"Switch between Codex built-in and configured providers."];
     subtitle.textColor = NSColor.secondaryLabelColor;
 
     NSTextField *currentLabel = [self label:@"Current provider" size:13 weight:NSFontWeightMedium];

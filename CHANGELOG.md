@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased
+
+- Add documentation-backed discovery for the Codex built-in `openai` provider.
+- Keep custom provider discovery dynamic under `[model_providers.*]`.
+- Reject custom tables and local adapters for the registered built-in `openai` ID.
+- Cover built-in/custom switching and adapter shutdown with offline tests.
+- Update the native app copy and version for the `0.2.0-alpha` candidate.
+
 ## 0.1.0-alpha - Public release candidate
 
 - Dynamically discover configured Codex providers.

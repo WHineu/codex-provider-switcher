@@ -62,7 +62,36 @@ class ProviderSwitcherTests(unittest.TestCase):
     def test_discovers_arbitrary_providers(self) -> None:
         value = switcher.snapshot(self.config, self.adapters)
         self.assertEqual(value["current"], "provider_a")
-        self.assertEqual([item["id"] for item in value["providers"]], ["provider_a", "provider_b"])
+        self.assertEqual(
+            [item["id"] for item in value["providers"]],
+            ["openai", "provider_a", "provider_b"],
+        )
+        self.assertEqual(value["providers"][0]["kind"], "builtin")
+        self.assertEqual(value["providers"][0]["name"], "OpenAI (Codex built-in)")
+
+    def test_builtin_openai_works_without_custom_providers(self) -> None:
+        self.config.write_text('model = "example-model"\nmodel_provider = "openai"\n', encoding="utf-8")
+        value = switcher.snapshot(self.config, self.adapters)
+        self.assertEqual(value["current"], "openai")
+        self.assertEqual([item["id"] for item in value["providers"]], ["openai"])
+
+    def test_switches_from_custom_provider_to_builtin_openai(self) -> None:
+        value = switcher.switch_provider(self.config, self.adapters, "openai", True)
+        self.assertTrue(value["changed"])
+        self.assertEqual(value["previous"], "provider_a")
+        self.assertEqual(self.parsed()["model_provider"], "openai")
+
+    def test_switches_from_builtin_openai_to_custom_provider(self) -> None:
+        shutil.copy2(FIXTURES / "builtin-current.toml", self.config)
+        value = switcher.switch_provider(self.config, self.adapters, "provider_a", True)
+        self.assertTrue(value["changed"])
+        self.assertEqual(value["previous"], "openai")
+        self.assertEqual(self.parsed()["model_provider"], "provider_a")
+
+    def test_reserved_builtin_provider_table_is_rejected(self) -> None:
+        shutil.copy2(FIXTURES / "reserved-builtin.toml", self.config)
+        with self.assertRaisesRegex(switcher.SwitcherError, "built into Codex"):
+            switcher.snapshot(self.config, self.adapters)
 
     def test_confirmation_guard_does_not_modify_config(self) -> None:
         before = self.config.read_bytes()
@@ -138,6 +167,14 @@ class ProviderSwitcherTests(unittest.TestCase):
         with self.assertRaisesRegex(switcher.SwitcherError, "unknown provider"):
             switcher.snapshot(self.config, self.adapters)
 
+    def test_adapter_cannot_be_assigned_to_builtin_provider(self) -> None:
+        self.adapters.write_text(
+            '[providers.openai]\ntype="http11_gateway"\nlisten_port=19877\nupstream_host="api.example.invalid"\n',
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(switcher.SwitcherError, "built-in provider"):
+            switcher.snapshot(self.config, self.adapters)
+
     def test_adapter_start_health_and_stop(self) -> None:
         port = free_port()
         self.adapters.write_text(
@@ -157,15 +194,15 @@ class ProviderSwitcherTests(unittest.TestCase):
         status = switcher.snapshot(self.config, self.adapters)
         row = next(item for item in status["providers"] if item["id"] == "provider_b")
         self.assertTrue(row["adapter_healthy"])
-        back = switcher.switch_provider(self.config, self.adapters, "provider_a", True)
-        self.assertEqual(back["current"], "provider_a")
+        back = switcher.switch_provider(self.config, self.adapters, "openai", True)
+        self.assertEqual(back["current"], "openai")
         for _ in range(30):
             if switcher.health(switcher.adapters_from_config(self.adapters, switcher.providers_from_config(self.parsed()))["provider_b"]) is None:
                 break
             time.sleep(0.1)
         self.assertIsNone(switcher.health(switcher.adapters_from_config(self.adapters, switcher.providers_from_config(self.parsed()))["provider_b"]))
 
-    def test_cli_json_has_no_vendor_assumptions(self) -> None:
+    def test_cli_json_reports_builtin_and_custom_providers(self) -> None:
         result = subprocess.run(
             [
                 sys.executable,
@@ -182,7 +219,9 @@ class ProviderSwitcherTests(unittest.TestCase):
         )
         value = json.loads(result.stdout)
         self.assertEqual(value["current"], "provider_a")
-        self.assertEqual(len(value["providers"]), 2)
+        self.assertEqual(len(value["providers"]), 3)
+        builtin = next(item for item in value["providers"] if item["id"] == "openai")
+        self.assertEqual(builtin["kind"], "builtin")
 
 
 class GatewayTests(unittest.TestCase):

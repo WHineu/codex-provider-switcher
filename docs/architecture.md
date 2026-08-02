@@ -4,7 +4,8 @@
 
 ```text
 Codex config
-  -> provider-neutral switching core
+  -> built-in registry + custom provider discovery
+     -> provider-neutral switching transaction
      -> direct provider, or
      -> typed local adapter -> HTTPS upstream
 
@@ -15,10 +16,20 @@ macOS app -> bundled launcher -> switching core
 
 The core owns discovery, status, confirmation, locking, TOML validation,
 atomic replacement, rollback, and adapter lifecycle. It does not own provider
-credentials, models, pricing, account state, or service-specific claims.
+credentials, models, pricing, subscription limits, account state, or
+service-specific claims.
 
-Provider IDs and display names come from `[model_providers.*]`. The root
-`model_provider` assignment is the only Codex setting the core modifies.
+Provider metadata comes from two sources:
+
+- a registry entry for the built-in `openai` provider, verified against
+  published Codex documentation;
+- custom provider IDs, names, and base URLs from `[model_providers.*]`.
+
+The 0.2 built-in registry intentionally contains only `openai` and stores no
+endpoints, credentials, or routing rules. Custom tables cannot override a
+registered built-in ID, and adapters cannot be assigned to registered built-in
+providers. The root `model_provider` assignment is the only Codex setting the
+core modifies.
 
 ## Adapter boundary
 

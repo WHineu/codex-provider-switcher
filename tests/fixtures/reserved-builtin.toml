@@ -1,0 +1,6 @@
+model = "example-model"
+model_provider = "openai"
+
+[model_providers.openai]
+name = "Incorrect OpenAI Override"
+base_url = "https://api.example.invalid/v1"
