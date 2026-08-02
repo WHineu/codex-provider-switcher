@@ -1,28 +1,37 @@
 # Codex Provider Switcher
 
-An unofficial, local-first switcher for providers already configured in Codex.
-It discovers `[model_providers.*]` dynamically, changes only the top-level
-`model_provider`, validates the result, and restores the original file if
-post-write validation fails.
+An unofficial, local-first switcher for the Codex built-in OpenAI provider and
+user-configured custom providers. It includes a documentation-backed registry
+entry for built-in `openai`, discovers `[model_providers.*]` dynamically,
+changes only the top-level `model_provider`, validates the result, and restores
+the original file if post-write validation fails.
 
-This repository is a public `0.1.0-alpha` release candidate. It is not affiliated
-with or endorsed by OpenAI or any API provider.
+The current development target is the source-only `0.2.0-alpha` candidate.
+Release scope, verification, and remaining publication gates are tracked in
+`PROJECT_STATE.md`. This project is not affiliated with or endorsed by OpenAI
+or any API provider.
 
 Current verification and release readiness are tracked in `PROJECT_STATE.md`.
 
 ## Why it exists
 
-Codex supports multiple provider definitions, but changing the active provider
-still requires careful configuration editing and a full Codex restart. This
-project makes that operation deterministic and gives providers with HTTP/1.1
-compatibility requirements an optional loopback-only adapter.
+Codex supports a built-in OpenAI provider and multiple custom provider
+definitions, but changing the active provider still requires careful
+configuration editing and a full Codex restart. This project makes that
+operation deterministic and gives custom providers with HTTP/1.1 compatibility
+requirements an optional loopback-only adapter.
 
-The core contains no provider names, service URLs, API keys, or arbitrary
-command hooks. Providers remain user-owned Codex configuration.
+The core contains no third-party provider names, service URLs, API keys, or
+arbitrary command hooks. Custom providers remain user-owned Codex
+configuration. The 0.2 registry intentionally includes only built-in `openai`,
+verified against published Codex documentation.
 
 ## Features
 
-- discovers any provider under `[model_providers.*]`;
+- includes the Codex built-in `openai` provider without creating a reserved
+  `[model_providers.openai]` table;
+- discovers any custom provider under `[model_providers.*]`;
+- rejects custom tables and adapters that try to override a registered built-in provider;
 - preserves nested profile settings and unrelated TOML content;
 - requires confirmation that active Codex tasks are stopped;
 - serializes concurrent writes with a file lock;
@@ -37,7 +46,8 @@ command hooks. Providers remain user-owned Codex configuration.
 
 - macOS 13 or newer for the native app;
 - Python 3.11 or newer with the standard-library `tomllib` module;
-- Codex providers already configured in `~/.codex/config.toml`.
+- custom Codex providers already configured in `~/.codex/config.toml`, when
+  custom routes are needed.
 
 ## CLI
 
@@ -103,6 +113,7 @@ MIT. See `LICENSE`.
 
 ## 中文说明
 
-这是一个非官方、仅在本机工作的 Codex Provider 切换器。它会动态读取
-`~/.codex/config.toml` 中已配置的 Provider，不绑定任何中转服务，也不读取
-或保存 API Key。切换前必须停止活动任务，切换后应完全退出并重新打开 Codex。
+这是一个非官方、仅在本机工作的 Codex Provider 切换器。它支持 Codex 内置的
+`openai` Provider，并动态读取 `~/.codex/config.toml` 中配置的自定义 Provider；
+它不绑定任何中转服务，也不读取或保存 API Key。切换前必须停止活动任务，切换后
+应完全退出并重新打开 Codex。

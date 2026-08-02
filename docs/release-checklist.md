@@ -1,15 +1,25 @@
 # Release Checklist
 
+## Required Alpha Gates
+
 - [x] License and copyright attribution reviewed by the owner.
 - [x] Repository name and maintainer contact confirmed.
-- [x] All 15 offline and lifecycle tests pass in the promoted workspace on 2026-07-30.
-- [ ] App launches, lists providers, switches, and rolls back safely in a fresh manual macOS session.
-- [x] App builds, its plist is valid, embedded resources match source, and strict ad-hoc signature verification passes.
-- [x] No real provider configuration, credentials, task IDs, or personal paths.
-- [x] No compiled cache or local log files are tracked.
+- [x] All 20 offline and lifecycle tests pass.
+- [x] Candidate app launches, lists providers, and completes a built-in OpenAI/adapter-backed route cycle in a fresh manual macOS session.
+- [x] Offline lifecycle tests cover failed-switch rollback without touching real Codex configuration.
+- [x] App builds, its plist is valid, packaged resources match source, and strict ad-hoc signature verification passes.
+- [x] No real provider configuration, credentials, task IDs, personal paths, compiled caches, or local logs are included.
 - [x] Third-party names appear only in compatibility documentation when needed.
 - [x] Non-affiliation and third-party terms boundary is clear.
-- [x] Initial release is source-only; no unnotarized public binary release.
-- [ ] Security reporting is enabled before announcing the repository.
-- [x] Local initial commit was explicitly approved and created.
-- [x] Public repository creation and first push are explicitly approved.
+- [x] Public distribution remains source-only; no unnotarized binary release asset is included.
+- [x] GitHub Private Vulnerability Reporting is enabled.
+
+## Publication Decisions
+
+- [x] Review the final 0.2 source changes and public wording.
+- [ ] Decide whether to create a versioned source release and define its maintenance policy.
+- [ ] Define signing and notarization requirements before any future public binary distribution.
+
+## Deferred Non-Blocking Coverage
+
+- [ ] Manually validate an additional direct custom-provider route before making broader real-service compatibility claims.

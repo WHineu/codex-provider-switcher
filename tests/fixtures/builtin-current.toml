@@ -1,0 +1,8 @@
+model = "example-model"
+model_provider = "openai"
+
+[model_providers.provider_a]
+name = "Provider A"
+base_url = "https://a.example.invalid/v1"
+env_key = "PROVIDER_A_API_KEY"
+wire_api = "responses"

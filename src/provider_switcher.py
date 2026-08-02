@@ -26,6 +26,11 @@ import uuid
 ROOT_PROVIDER_RE = re.compile(r"^(\s*)model_provider\s*=\s*([^#\r\n]+?)(\s*(?:#.*)?(?:\r?\n)?)$")
 PROVIDER_ID_RE = re.compile(r"^[A-Za-z0-9_.-]+$")
 ADAPTER_TYPE = "http11_gateway"
+BUILTIN_PROVIDER_KIND = "builtin"
+CUSTOM_PROVIDER_KIND = "custom"
+CODEX_BUILTIN_PROVIDERS = {
+    "openai": "OpenAI (Codex built-in)",
+}
 
 
 class SwitcherError(RuntimeError):
@@ -37,6 +42,7 @@ class Provider:
     provider_id: str
     name: str
     base_url: str
+    kind: str
 
 
 @dataclass(frozen=True)
@@ -85,13 +91,21 @@ def load_toml(path: Path, *, required: bool = True) -> dict:
 
 
 def providers_from_config(config: dict) -> dict[str, Provider]:
-    raw = config.get("model_providers")
-    if not isinstance(raw, dict) or not raw:
-        raise SwitcherError("No [model_providers.*] tables were found")
-    result: dict[str, Provider] = {}
+    result = {
+        provider_id: Provider(provider_id, name, "", BUILTIN_PROVIDER_KIND)
+        for provider_id, name in CODEX_BUILTIN_PROVIDERS.items()
+    }
+    raw = config.get("model_providers", {})
+    if not isinstance(raw, dict):
+        raise SwitcherError("[model_providers] must be a TOML table")
     for provider_id, details in raw.items():
         if not isinstance(provider_id, str) or not PROVIDER_ID_RE.fullmatch(provider_id):
             raise SwitcherError(f"Unsupported provider identifier: {provider_id!r}")
+        if provider_id in result:
+            raise SwitcherError(
+                f"Provider {provider_id!r} is built into Codex and must not have a "
+                f"[model_providers.{provider_id}] table"
+            )
         if not isinstance(details, dict):
             raise SwitcherError(f"Provider {provider_id!r} must be a TOML table")
         name = details.get("name")
@@ -100,6 +114,7 @@ def providers_from_config(config: dict) -> dict[str, Provider]:
             provider_id=provider_id,
             name=name if isinstance(name, str) and name else provider_id,
             base_url=base_url if isinstance(base_url, str) else "",
+            kind=CUSTOM_PROVIDER_KIND,
         )
     return result
 
@@ -109,7 +124,10 @@ def current_provider(config: dict, providers: dict[str, Provider]) -> str:
     if not isinstance(current, str) or not current:
         raise SwitcherError("Top-level model_provider is missing or invalid")
     if current not in providers:
-        raise SwitcherError(f"Current provider {current!r} has no [model_providers.{current}] table")
+        raise SwitcherError(
+            f"Current provider {current!r} is not a known Codex built-in and has no "
+            f"[model_providers.{current}] table"
+        )
     return current
 
 
@@ -152,6 +170,8 @@ def adapters_from_config(path: Path, providers: dict[str, Provider]) -> dict[str
     for provider_id, raw in raw_providers.items():
         if provider_id not in providers:
             raise SwitcherError(f"Adapter references unknown provider {provider_id!r}")
+        if providers[provider_id].kind == BUILTIN_PROVIDER_KIND:
+            raise SwitcherError(f"Adapter cannot be assigned to built-in provider {provider_id!r}")
         adapter = parse_adapter(provider_id, raw)
         if adapter.listen_port in used_ports:
             raise SwitcherError(f"Multiple adapters use local port {adapter.listen_port}")
@@ -445,6 +465,7 @@ def snapshot(config_path: Path, adapters_path: Path) -> dict:
             "id": provider_id,
             "name": provider.name,
             "base_url": provider.base_url,
+            "kind": provider.kind,
             "current": provider_id == current,
             "adapter": ADAPTER_TYPE if adapter else None,
             "adapter_healthy": health_matches(health(adapter), adapter) if adapter else None,
