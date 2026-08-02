@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.0-alpha - 2026-08-02
+
 - Add documentation-backed discovery for the Codex built-in `openai` provider.
 - Keep custom provider discovery dynamic under `[model_providers.*]`.
 - Reject custom tables and local adapters for the registered built-in `openai` ID.
