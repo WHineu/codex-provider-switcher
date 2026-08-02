@@ -95,6 +95,18 @@ python3 -m unittest discover -s tests -p 'test_*.py' -v
 Tests use temporary configurations, random loopback ports, and reserved
 `.invalid` hostnames. They do not access provider services or credentials.
 
+## Maturity direction
+
+This project matures as a deterministic, safety-focused software product through
+verified source releases, compatibility fixes, lifecycle hardening, and explicit
+signing and notarization policy before any public binary distribution. Its core
+switching, validation, adapter ownership, and rollback behavior remains in code,
+tests, the CLI, and the native app rather than moving into a model-driven Skill.
+
+A future Skill may assist with diagnostics or runbook selection after those
+support workflows become repetitive and stable. It must not replace the tested
+switching implementation, inspect credentials, or broaden configuration authority.
+
 ## Security
 
 Read `SECURITY.md` before reporting a vulnerability. Use GitHub Issues for
