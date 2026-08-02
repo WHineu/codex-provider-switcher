@@ -2,7 +2,7 @@
 
 - **Project:** codex-provider-switcher
 - **Version:** 0.2.0-alpha
-- **Status:** Source-only release candidate
+- **Status:** Published source-only prerelease
 - **Last verified:** 2026-08-02
 
 ## Verified
@@ -22,12 +22,14 @@
 - Manual validation covers provider discovery and a complete built-in OpenAI/adapter-backed
   route cycle, including owned-adapter shutdown after returning to the built-in route.
 - GitHub Private Vulnerability Reporting is enabled.
+- The `v0.2.0-alpha` annotated tag and source-only GitHub prerelease are published
+  from the verified commit, with no attached binary assets.
 - Scans found no personal paths, credentials, task IDs, private routes, real
   provider configuration, or third-party provider hard-coding in candidate files.
 
 ## Release Scope
 
-- The 0.2 line is a provider-neutral, local-first, source-only alpha candidate.
+- The 0.2 line is a provider-neutral, local-first, source-only alpha prerelease.
 - Public artifacts contain source, tests, build scripts, reserved-domain fixtures,
   and redacted documentation only.
 - No unnotarized binary is distributed as a public release asset.
@@ -37,8 +39,8 @@
 - Provider availability, pricing, model equivalence, credentials, and account state
   remain outside the project's claims and responsibilities.
 
-## Remaining Gates
+## Maintenance Position
 
-1. Review the final 0.2 source changes and public wording.
-2. Decide whether to create a versioned source release and define its maintenance policy.
+1. Maintain the alpha line on a best-effort basis through public Issues and GitHub Private Vulnerability Reporting.
+2. Treat additional direct custom-provider real-service validation as optional, non-blocking coverage.
 3. Define signing and notarization requirements before any future public binary distribution.

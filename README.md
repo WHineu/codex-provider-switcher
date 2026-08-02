@@ -6,8 +6,9 @@ entry for built-in `openai`, discovers `[model_providers.*]` dynamically,
 changes only the top-level `model_provider`, validates the result, and restores
 the original file if post-write validation fails.
 
-The current development target is the source-only `0.2.0-alpha` candidate.
-Release scope, verification, and remaining publication gates are tracked in
+The latest published version is the source-only
+[`v0.2.0-alpha`](https://github.com/WHineu/codex-provider-switcher/releases/tag/v0.2.0-alpha)
+prerelease. Release scope, verification, and maintenance status are tracked in
 `PROJECT_STATE.md`. This project is not affiliated with or endorsed by OpenAI
 or any API provider.
 

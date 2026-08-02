@@ -14,10 +14,10 @@
 - [x] Public distribution remains source-only; no unnotarized binary release asset is included.
 - [x] GitHub Private Vulnerability Reporting is enabled.
 
-## Publication Decisions
+## Publication Status
 
 - [x] Review the final 0.2 source changes and public wording.
-- [ ] Decide whether to create a versioned source release and define its maintenance policy.
+- [x] Publish `v0.2.0-alpha` as a source-only prerelease with a best-effort maintenance policy.
 - [ ] Define signing and notarization requirements before any future public binary distribution.
 
 ## Deferred Non-Blocking Coverage
