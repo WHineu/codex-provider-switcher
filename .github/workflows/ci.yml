@@ -38,8 +38,8 @@ jobs:
           set -eu
           readonly app="build/Codex Provider Switcher.app"
           /usr/bin/plutil -lint "${app}/Contents/Info.plist"
-          [[ "$(/usr/bin/plutil -extract CFBundleShortVersionString raw "${app}/Contents/Info.plist")" == "0.2.1-beta.1" ]]
-          [[ "$(/usr/bin/plutil -extract CFBundleVersion raw "${app}/Contents/Info.plist")" == "4" ]]
+          [[ "$(/usr/bin/plutil -extract CFBundleShortVersionString raw "${app}/Contents/Info.plist")" == "0.2.1-rc.1" ]]
+          [[ "$(/usr/bin/plutil -extract CFBundleVersion raw "${app}/Contents/Info.plist")" == "5" ]]
           /usr/bin/codesign --verify --deep --strict "${app}"
           /usr/bin/cmp src/provider_switcher.py "${app}/Contents/Resources/provider_switcher.py"
           /usr/bin/cmp src/http11_gateway.py "${app}/Contents/Resources/http11_gateway.py"
