@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Refine the native macOS app into a compact, status-first provider switcher.
+- Add explicit loading, empty, error, adapter, confirmation, and result states.
+- Improve keyboard defaults and accessibility labels without changing the CLI or configuration transaction.
+- Validate bidirectional switching with configured providers in a real Codex environment.
+
 ## 0.2.0-alpha - 2026-08-02
 
 - Add documentation-backed discovery for the Codex built-in `openai` provider.

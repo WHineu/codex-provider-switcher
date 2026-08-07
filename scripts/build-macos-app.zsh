@@ -4,7 +4,7 @@ set -eu
 
 readonly ROOT="${0:A:h:h}"
 readonly BUILD_DIR="${ROOT}/build"
-readonly APP="${BUILD_DIR}/Codex Provider Switcher Preview.app"
+readonly APP="${BUILD_DIR}/Codex Provider Switcher.app"
 readonly CONTENTS="${APP}/Contents"
 
 /bin/rm -rf -- "$APP"
