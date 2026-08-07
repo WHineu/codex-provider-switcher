@@ -2,7 +2,7 @@
 
 - **Project:** codex-provider-switcher
 - **Version:** 0.2.1-alpha
-- **Status:** Unreleased source-only prerelease candidate
+- **Status:** Published source-only prerelease
 - **Last verified:** 2026-08-07
 
 ## Verified
@@ -26,7 +26,7 @@
 - The native interface presents current provider and adapter health in a compact status
   surface with explicit loading, empty, error, confirmation, and result states.
 - GitHub Private Vulnerability Reporting is enabled.
-- The `v0.2.0-alpha` annotated tag and source-only GitHub prerelease are published
+- The `v0.2.1-alpha` annotated tag and source-only GitHub prerelease are published
   from the verified commit, with no attached binary assets.
 - Scans found no personal paths, credentials, task IDs, private routes, real
   provider configuration, or third-party provider hard-coding in candidate files.

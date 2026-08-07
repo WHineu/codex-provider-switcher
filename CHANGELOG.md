@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.2.1-alpha - 2026-08-07
+
 - Refine the native macOS app into a compact, status-first provider switcher.
 - Add explicit loading, empty, error, adapter, confirmation, and result states.
 - Improve keyboard defaults and accessibility labels without changing the CLI or configuration transaction.
