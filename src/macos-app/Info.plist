@@ -5,15 +5,15 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleDisplayName</key>
-    <string>Codex Provider Switcher</string>
+    <string>Codex Provider Switcher Preview</string>
     <key>CFBundleExecutable</key>
     <string>CodexProviderSwitcher</string>
     <key>CFBundleIdentifier</key>
-    <string>org.codex-provider-switcher.app</string>
+    <string>org.codex-provider-switcher.preview</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
-    <string>Codex Provider Switcher</string>
+    <string>Codex Provider Switcher Preview</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
