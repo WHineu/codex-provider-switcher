@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: macos-14
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+
+      - name: Run offline and lifecycle tests
+        run: /bin/zsh tests/run-tests.zsh
+
+      - name: Build native macOS app
+        run: /bin/zsh scripts/build-macos-app.zsh
+
+      - name: Verify native app bundle
+        shell: /bin/zsh {0}
+        run: |
+          set -eu
+          readonly app="build/Codex Provider Switcher.app"
+          /usr/bin/plutil -lint "${app}/Contents/Info.plist"
+          [[ "$(/usr/bin/plutil -extract CFBundleShortVersionString raw "${app}/Contents/Info.plist")" == "0.2.1-beta.1" ]]
+          [[ "$(/usr/bin/plutil -extract CFBundleVersion raw "${app}/Contents/Info.plist")" == "4" ]]
+          /usr/bin/codesign --verify --deep --strict "${app}"
+          /usr/bin/cmp src/provider_switcher.py "${app}/Contents/Resources/provider_switcher.py"
+          /usr/bin/cmp src/http11_gateway.py "${app}/Contents/Resources/http11_gateway.py"
+          /usr/bin/cmp src/run-switcher.zsh "${app}/Contents/Resources/run-switcher.zsh"
+          /usr/bin/cmp src/macos-app/Info.plist "${app}/Contents/Info.plist"
+          /usr/bin/file "${app}/Contents/MacOS/CodexProviderSwitcher"

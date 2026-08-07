@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.2.1-beta.1 - 2026-08-07
+
+- Add macOS GitHub Actions CI for tests, native app builds, signing checks, and bundled resource verification.
+- Promote the repeatedly validated native app line from alpha to beta without changing provider switching behavior.
+
 ## 0.2.1-alpha - 2026-08-07
 
 - Refine the native macOS app into a compact, status-first provider switcher.
