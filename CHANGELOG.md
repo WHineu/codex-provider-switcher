@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.2.1-rc.1 - 2026-08-07
+
+- Freeze the validated provider switcher feature set for release-candidate testing.
+- Record repeated successful manual validation of the installed beta app without changing switching behavior.
+
 ## 0.2.1-beta.1 - 2026-08-07
 
 - Add macOS GitHub Actions CI for tests, native app builds, signing checks, and bundled resource verification.
