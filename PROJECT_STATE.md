@@ -1,8 +1,8 @@
 # PROJECT_STATE
 
 - **Project:** codex-provider-switcher
-- **Version:** 0.2.1-alpha
-- **Status:** Published source-only prerelease
+- **Version:** 0.2.1-beta.1
+- **Status:** Published source-only beta prerelease
 - **Last verified:** 2026-08-07
 
 ## Verified
@@ -25,15 +25,17 @@
   providers, and Codex remained usable after each switch.
 - The native interface presents current provider and adapter health in a compact status
   surface with explicit loading, empty, error, confirmation, and result states.
+- GitHub Actions CI runs the full test suite, native macOS build, signing checks,
+  version checks, and bundled resource comparisons on pull requests and `main`.
 - GitHub Private Vulnerability Reporting is enabled.
-- The `v0.2.1-alpha` annotated tag and source-only GitHub prerelease are published
+- The `v0.2.1-beta.1` annotated tag and source-only GitHub prerelease are published
   from the verified commit, with no attached binary assets.
 - Scans found no personal paths, credentials, task IDs, private routes, real
   provider configuration, or third-party provider hard-coding in candidate files.
 
 ## Release Scope
 
-- The 0.2 line is a provider-neutral, local-first, source-only alpha prerelease.
+- The 0.2 line is a provider-neutral, local-first, source-only beta prerelease.
 - Public artifacts contain source, tests, build scripts, reserved-domain fixtures,
   and redacted documentation only.
 - No unnotarized binary is distributed as a public release asset.
@@ -45,6 +47,6 @@
 
 ## Maintenance Position
 
-1. Maintain the alpha line on a best-effort basis through public Issues and GitHub Private Vulnerability Reporting.
+1. Maintain the beta line on a best-effort basis through public Issues and GitHub Private Vulnerability Reporting.
 2. Treat additional direct custom-provider real-service validation as optional, non-blocking coverage.
 3. Define signing and notarization requirements before any future public binary distribution.
