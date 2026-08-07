@@ -71,12 +71,12 @@
                   styleMask:NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskMiniaturizable
                     backing:NSBackingStoreBuffered
                       defer:NO];
-    self.window.title = @"Codex Provider Switcher Preview";
+    self.window.title = @"Codex Provider Switcher";
     self.window.releasedWhenClosed = NO;
     [self.window center];
 
     NSTextField *title = [self label:@"Codex Provider Switcher" size:19 weight:NSFontWeightSemibold];
-    NSString *version = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] ?: @"Preview";
+    NSString *version = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] ?: @"Development";
     NSTextField *versionLabel = [self label:version size:11 weight:NSFontWeightMedium];
     versionLabel.textColor = NSColor.tertiaryLabelColor;
     NSView *headerSpacer = [[NSView alloc] init];

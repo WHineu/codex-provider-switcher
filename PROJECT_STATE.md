@@ -1,9 +1,9 @@
 # PROJECT_STATE
 
 - **Project:** codex-provider-switcher
-- **Version:** 0.2.0-alpha
-- **Status:** Published source-only prerelease
-- **Last verified:** 2026-08-02
+- **Version:** 0.2.1-alpha
+- **Status:** Unreleased source-only prerelease candidate
+- **Last verified:** 2026-08-07
 
 ## Verified
 
@@ -21,6 +21,10 @@
   packaged resources match source, and strict ad-hoc signature verification passes.
 - Manual validation covers provider discovery and a complete built-in OpenAI/adapter-backed
   route cycle, including owned-adapter shutdown after returning to the built-in route.
+- The refined native app completed bidirectional switching between configured custom
+  providers, and Codex remained usable after each switch.
+- The native interface presents current provider and adapter health in a compact status
+  surface with explicit loading, empty, error, confirmation, and result states.
 - GitHub Private Vulnerability Reporting is enabled.
 - The `v0.2.0-alpha` annotated tag and source-only GitHub prerelease are published
   from the verified commit, with no attached binary assets.
