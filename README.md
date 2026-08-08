@@ -7,8 +7,8 @@ changes only the top-level `model_provider`, validates the result, and restores
 the original file if post-write validation fails.
 
 The latest published version is the source-only
-[`v0.2.1-rc.1`](https://github.com/WHineu/codex-provider-switcher/releases/tag/v0.2.1-rc.1)
-prerelease. Release scope, verification, and maintenance status are tracked in
+[`v0.2.1`](https://github.com/WHineu/codex-provider-switcher/releases/tag/v0.2.1)
+release. Release scope, verification, and maintenance status are tracked in
 `PROJECT_STATE.md`. This project is not affiliated with or endorsed by OpenAI
 or any API provider.
 

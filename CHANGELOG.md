@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.2.1 - 2026-08-08
+
+- Promote the validated release candidate to the stable 0.2.1 release without changing provider switching behavior.
+- Record successful manual validation of the installed release candidate.
+
 ## 0.2.1-rc.1 - 2026-08-07
 
 - Freeze the validated provider switcher feature set for release-candidate testing.
